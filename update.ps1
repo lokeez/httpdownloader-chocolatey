@@ -2,6 +2,12 @@ Import-Module au
 
 Set-Location $PSScriptRoot
 
+Write-Host "Current dir:"
+Get-Location
+
+Write-Host "Files:"
+Get-ChildItem
+
 $repo = 'erickutcher/httpdownloader'
 
 function global:au_GetLatest {
