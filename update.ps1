@@ -26,4 +26,4 @@ function global:au_SearchReplace {
     }
 }
 
-update -ChecksumFor 32,64
+update -ChecksumFor '32','64'
