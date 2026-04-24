@@ -1,0 +1,32 @@
+name: AU
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'   # щопонеділка о 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install AU
+        shell: pwsh
+        run: |
+          Install-Module au -Scope CurrentUser -Force
+
+      - name: Run AU
+        shell: pwsh
+        run: |
+          ./update.ps1
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add .
+          git commit -m "AU: update package" || echo "No changes"
+          git push
