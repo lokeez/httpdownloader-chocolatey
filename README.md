@@ -3,7 +3,7 @@
 [![GitHub Repo Stars](https://img.shields.io/github/stars/lokeez/httpdownloader-chocolatey?style=social)](https://github.com/YOUR_USERNAME/httpdownloader-chocolatey)
 [![License: Unofficial](https://img.shields.io/badge/license-unofficial-lightgrey)](#disclaimer)
 [![Chocolatey](https://img.shields.io/chocolatey/v/chocolatey)](https://chocolatey.org/)
-[![AU](https://img.shields.io/github/actions/workflow/status/lokeez/httpdownloader-chocolatey/au.yml?label=auto-update)](https://github.com/YOUR_USERNAME/httpdownloader-chocolatey/actions)
+[![AU](https://img.shields.io/github/actions/workflow/status/lokeez/httpdownloader-chocolatey/au.yml?label=auto-update)](https://github.com/lokeez/httpdownloader-chocolatey/actions)
 
 This is an unofficial Chocolatey package for HTTP Downloader.
 
