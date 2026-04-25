@@ -2,13 +2,6 @@ Import-Module au
 
 Set-Location $env:GITHUB_WORKSPACE
 
-Write-Host "Current dir:"
-Get-Location
-
-Write-Host "Files:"
-Get-ChildItem
-
-$packageName = 'httpdownloader'
 $repo = 'erickutcher/httpdownloader'
 
 function global:au_GetLatest {
@@ -35,4 +28,7 @@ function global:au_SearchReplace {
     }
 }
 
-update -ChecksumFor all -PackageName $packageName
+# 👇 КЛЮЧОВЕ
+au_Init
+
+update -ChecksumFor all
