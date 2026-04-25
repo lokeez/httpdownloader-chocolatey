@@ -8,6 +8,7 @@ Get-Location
 Write-Host "Files:"
 Get-ChildItem
 
+$packageName = 'httpdownloader'
 $repo = 'erickutcher/httpdownloader'
 
 function global:au_GetLatest {
@@ -34,4 +35,4 @@ function global:au_SearchReplace {
     }
 }
 
-update -ChecksumFor all -PackageName httpdownloader
+update -ChecksumFor all -PackageName $packageName
