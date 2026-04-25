@@ -28,7 +28,4 @@ function global:au_SearchReplace {
     }
 }
 
-# 👇 КЛЮЧОВЕ
-au_Init
-
-update -ChecksumFor all
+update -ChecksumFor all -Root $env:GITHUB_WORKSPACE
