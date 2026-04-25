@@ -12,7 +12,11 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
-
+      - name: Debug files
+        shell: pwsh
+        run: |
+             pwd
+             dir
       - name: Install AU
         shell: pwsh
         run: Install-Module au -Scope CurrentUser -Force
