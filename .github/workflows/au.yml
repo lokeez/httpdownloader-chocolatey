@@ -36,7 +36,7 @@ jobs:
           Write-Host "Files:"
           Get-ChildItem
 
-          ./update.ps1
+          powershell -NoProfile -ExecutionPolicy Bypass -File update.ps1
 
       - name: Install package locally
         shell: pwsh
