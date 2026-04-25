@@ -25,10 +25,17 @@ jobs:
 
       - name: Run AU
         shell: pwsh
-        working-directory: ${{ github.workspace }}
         run: |
-          pwd
-          dir
+          Write-Host "GITHUB_WORKSPACE = $env:GITHUB_WORKSPACE"
+    
+          Set-Location $env:GITHUB_WORKSPACE
+
+          Write-Host "Current dir:"
+          Get-Location
+
+          Write-Host "Files:"
+          Get-ChildItem
+
           ./update.ps1
 
       - name: Install package locally
