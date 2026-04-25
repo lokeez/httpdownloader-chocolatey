@@ -28,4 +28,10 @@ function global:au_SearchReplace {
     }
 }
 
+$global:au_Packages = @{
+    "." = @{
+        NuspecPath = ".\httpdownloader.nuspec"
+    }
+}
+
 Update-Package -ChecksumFor all
