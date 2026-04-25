@@ -12,6 +12,7 @@ jobs:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - uses: actions/checkout@v4
+      
       - name: Debug files
         shell: pwsh
         run: |
@@ -23,7 +24,11 @@ jobs:
 
       - name: Run AU
         shell: pwsh
-        run: ./update.ps1
+        working-directory: ${{ github.workspace }}
+        run: |
+          pwd
+          dir
+          ./update.ps1
 
       - name: Install package locally
         shell: pwsh
