@@ -28,4 +28,4 @@ function global:au_SearchReplace {
     }
 }
 
-update -ChecksumFor all -Root $env:GITHUB_WORKSPACE
+Update-Package -ChecksumFor all
