@@ -1,6 +1,6 @@
 Import-Module au
 
-Set-Location $PSScriptRoot
+Set-Location $env:GITHUB_WORKSPACE
 
 Write-Host "Current dir:"
 Get-Location
