@@ -34,4 +34,4 @@ function global:au_SearchReplace {
     }
 }
 
-update -ChecksumFor all
+update -ChecksumFor all -PackageName httpdownloader
