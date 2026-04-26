@@ -12,6 +12,10 @@ function global:au_GetLatest {
     $url32 = $release.assets | Where-Object { $_.name -match '32\.zip$' } | Select-Object -ExpandProperty browser_download_url
     $url64 = $release.assets | Where-Object { $_.name -match '64\.zip$' } | Select-Object -ExpandProperty browser_download_url
 
+    if ($Latest.Version -eq $Package.NuspecVersion) {
+        Write-Host "No new version available"
+    }
+    
     return @{
         Version = $version
         URL32   = $url32
