@@ -15,50 +15,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Debug files
-        shell: pwsh
-        run: |
-          pwd
-          dir
-
       - name: Install AU
         shell: pwsh
         run: |
           Install-Module au -Scope CurrentUser -Force
           Import-Module au
-          Get-Command Update-Package   # <-- перевірка
+          Get-Command Update-Package
 
-      - name: Run AU
+      - name: Run AU update
         shell: pwsh
         run: |
-          Write-Host "GITHUB_WORKSPACE = $env:GITHUB_WORKSPACE"
-
           Set-Location $env:GITHUB_WORKSPACE
-
-          Write-Host "Current dir:"
-          Get-Location
-
-          Write-Host "Files:"
-          Get-ChildItem
-
-          # ВАЖЛИВО: без powershell.exe!
           ./update.ps1
-
-      - name: Pack Chocolatey package
-        shell: pwsh
-        run: choco pack
-
-      - name: Install package locally
-        shell: pwsh
-        run: choco install httpdownloader -y -s .
 
       - name: Run verifier
         shell: pwsh
         run: ./tools/verifier.ps1
-
-      - name: Clean artifacts
-        shell: pwsh
-        run: Remove-Item *.nupkg -ErrorAction Ignore
 
       - name: Commit changes
         shell: pwsh
@@ -68,9 +40,10 @@ jobs:
 
           git add .
 
-          if (git diff --cached --quiet) {
-            Write-Host "No changes to commit"
-          } else {
+          $diff = git diff --cached --quiet
+          if ($LASTEXITCODE -ne 0) {
             git commit -m "AU: update package"
             git push
+          } else {
+            Write-Host "No changes to commit"
           }
