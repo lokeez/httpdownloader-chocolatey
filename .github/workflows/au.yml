@@ -2,7 +2,7 @@ name: AU
 
 on:
   schedule:
-    - cron: '0 3 * * 1'   # щопонеділка о 03:00 UTC
+    - cron: '0 3 * * 1'
   workflow_dispatch:
 
 permissions:
@@ -11,26 +11,28 @@ permissions:
 jobs:
   update:
     runs-on: windows-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Debug files
         shell: pwsh
         run: |
-             pwd
-             dir
-      
+          pwd
+          dir
+
       - name: Install AU
         shell: pwsh
-        run: Install-Module au -Scope CurrentUser -Force
+        run: |
+          Install-Module au -Scope CurrentUser -Force
+          Import-Module au
+          Get-Command Update-Package   # <-- перевірка
 
       - name: Run AU
         shell: pwsh
         run: |
           Write-Host "GITHUB_WORKSPACE = $env:GITHUB_WORKSPACE"
-    
+
           Set-Location $env:GITHUB_WORKSPACE
 
           Write-Host "Current dir:"
@@ -39,12 +41,13 @@ jobs:
           Write-Host "Files:"
           Get-ChildItem
 
-          powershell -NoProfile -ExecutionPolicy Bypass -File update.ps1
+          # ВАЖЛИВО: без powershell.exe!
+          ./update.ps1
 
       - name: Pack Chocolatey package
         shell: pwsh
         run: choco pack
-        
+
       - name: Install package locally
         shell: pwsh
         run: choco install httpdownloader -y -s .
@@ -66,7 +69,7 @@ jobs:
           git add .
 
           if (git diff --cached --quiet) {
-            Write-Host "##[section]No changes to commit"
+            Write-Host "No changes to commit"
           } else {
             git commit -m "AU: update package"
             git push
