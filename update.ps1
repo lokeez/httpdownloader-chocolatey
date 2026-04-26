@@ -1,7 +1,5 @@
 Import-Module au
 
-Set-Location $PSScriptRoot
-
 $repo = 'erickutcher/httpdownloader'
 
 function global:au_GetLatest {
