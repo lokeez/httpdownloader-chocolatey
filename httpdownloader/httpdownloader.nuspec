@@ -40,7 +40,7 @@ This is a nuspec. It mostly adheres to https://docs.nuget.org/create/Nuspec-Refe
     <projectUrl>https://github.com/erickutcher/httpdownloader</projectUrl>
     <!-- There are a number of CDN Services that can be used for hosting the Icon for a package. More information can be found here: https://docs.chocolatey.org/en-us/create/create-packages#package-icon-guidelines -->
     <!-- Here is an example using Githack -->
-    <iconUrl>https://raw.githubusercontent.com/erickutcher/httpdownloader/refs/heads/master/HTTP_Downloader/icon.ico</iconUrl>
+    <iconUrl>https://rawcdn.githack.com/lokeez/httpdownloader-chocolatey/main/httpdownloader/httpdownloader_128x128.png</iconUrl>
     <copyright>Eric Kutcher</copyright>
     <!-- If there is a license Url available, it is required for the community feed -->
     <!-- <licenseUrl>Software License Location __REMOVE_OR_FILL_OUT__</licenseUrl>
