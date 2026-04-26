@@ -24,26 +24,11 @@ jobs:
           Import-Module au
           Get-Command Update-Package
 
-      - name: Debug AU source
-        shell: pwsh
-        run: |
-          $auPkg = "C:\Users\runneradmin\Documents\PowerShell\Modules\au\2022.10.24\Private\AUPackage.ps1"
-          Write-Host "=== Lines 18-35 of AUPackage.ps1 ==="
-          Get-Content $auPkg | Select-Object -Index (17..34) | ForEach-Object { $i = 18; "$($i++)`: $_" }
-          Get-Content $auPkg | ForEach-Object -Begin {$n=1} -Process {"${n}: $_"; $n++} | Select-Object -Index (17..34)
-          
-          Write-Host "=== Current pwd when AU runs ==="
-          Write-Host "GITHUB_WORKSPACE = $env:GITHUB_WORKSPACE"
-          Write-Host "Files in workspace:"
-          Get-ChildItem "$env:GITHUB_WORKSPACE"
-      
       - name: Run AU update
         shell: pwsh
         run: |
-          Set-Location "$env:GITHUB_WORKSPACE"
-          # AU визначає директорію пакету через $MyInvocation.ScriptName
-          # pwsh -File передає правильний ScriptName, на відміну від dot-sourcing
-          pwsh -File "$env:GITHUB_WORKSPACE\update.ps1"
+          Set-Location "$env:GITHUB_WORKSPACE\httpdownloader"
+          pwsh -File "$env:GITHUB_WORKSPACE\httpdownloader\update.ps1"
 
       - name: Run verifier
         shell: pwsh
