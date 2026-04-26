@@ -7,12 +7,12 @@ function global:au_GetLatest {
     $version = $release.tag_name.TrimStart('v')
 
     $url32 = $release.assets |
-        Where-Object { $_.name -match '32\.zip$' } |
-        Select-Object -ExpandProperty browser_download_url
+        Where-Object { $_.name -match '^HTTP_Downloader_32\.zip$' } |
+        Select-Object -First 1 -ExpandProperty browser_download_url
 
     $url64 = $release.assets |
-        Where-Object { $_.name -match '64\.zip$' } |
-        Select-Object -ExpandProperty browser_download_url
+        Where-Object { $_.name -match '^HTTP_Downloader_64\.zip$' } |
+        Select-Object -First 1 -ExpandProperty browser_download_url
 
     if (-not $url32 -or -not $url64) {
         throw "Could not find download URLs for version $version"
