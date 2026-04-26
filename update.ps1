@@ -1,6 +1,7 @@
 Import-Module au
 
-Set-Location $env:GITHUB_WORKSPACE
+# 🔥 КРИТИЧНО: завжди працюємо відносно скрипта
+Set-Location $PSScriptRoot
 
 $repo = 'erickutcher/httpdownloader'
 
@@ -12,13 +13,8 @@ function global:au_GetLatest {
     $url32 = $release.assets | Where-Object { $_.name -match '32\.zip$' } | Select-Object -ExpandProperty browser_download_url
     $url64 = $release.assets | Where-Object { $_.name -match '64\.zip$' } | Select-Object -ExpandProperty browser_download_url
 
-    Write-Host "### Latest version from GitHub: $version"
-    Write-Host "### Current version from nuspec: $($Package.NuspecVersion)"
-    
-    if ($Latest.Version -eq $Package.NuspecVersion) {
-        Write-Host "### No new version available"
-    }
-    
+    Write-Host "Latest version from GitHub: $version"
+
     return @{
         Version = $version
         URL32   = $url32
@@ -35,6 +31,7 @@ function global:au_SearchReplace {
     }
 }
 
+# 👇 Це норм, але навіть можна не писати якщо nuspec в корені
 $global:au_Packages = @{
     "." = @{
         NuspecPath = ".\httpdownloader.nuspec"
