@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4.2.2
 
       - name: Install AU
         shell: pwsh
@@ -25,14 +25,10 @@ jobs:
       - name: Run AU update
         shell: pwsh
         run: |
-          # AU потребує що pwd = директорія пакету (де лежить nuspec)
-          # Set-Location всередині update.ps1 через $PSScriptRoot це забезпечує
-          # але тільки якщо ми не міняємо pwd ззовні після цього
           Set-Location "$env:GITHUB_WORKSPACE"
-          
-          # Запускаємо через dot-sourcing щоб Set-Location з $PSScriptRoot
-          # застосувався до поточного процесу, а не до дочірнього
-          . "$env:GITHUB_WORKSPACE\update.ps1"
+          # AU визначає директорію пакету через $MyInvocation.ScriptName
+          # pwsh -File передає правильний ScriptName, на відміну від dot-sourcing
+          pwsh -File "$env:GITHUB_WORKSPACE\update.ps1"
 
       - name: Run verifier
         shell: pwsh
