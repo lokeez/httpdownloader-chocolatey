@@ -1,17 +1,24 @@
 Import-Module au
 
-# 🔥 КРИТИЧНО: завжди працюємо відносно скрипта
 Set-Location $PSScriptRoot
 
 $repo = 'erickutcher/httpdownloader'
 
 function global:au_GetLatest {
     $release = Invoke-RestMethod "https://api.github.com/repos/$repo/releases/latest"
-
     $version = $release.tag_name.TrimStart('v')
 
-    $url32 = $release.assets | Where-Object { $_.name -match '32\.zip$' } | Select-Object -ExpandProperty browser_download_url
-    $url64 = $release.assets | Where-Object { $_.name -match '64\.zip$' } | Select-Object -ExpandProperty browser_download_url
+    $url32 = $release.assets |
+        Where-Object { $_.name -match '32\.zip$' } |
+        Select-Object -ExpandProperty browser_download_url
+
+    $url64 = $release.assets |
+        Where-Object { $_.name -match '64\.zip$' } |
+        Select-Object -ExpandProperty browser_download_url
+
+    if (-not $url32 -or -not $url64) {
+        throw "Could not find download URLs for version $version"
+    }
 
     Write-Host "Latest version from GitHub: $version"
 
@@ -28,13 +35,6 @@ function global:au_SearchReplace {
             "(?i)(^\s*url\s*=\s*)'.*'"      = "`$1'$($Latest.URL32)'"
             "(?i)(^\s*url64bit\s*=\s*)'.*'" = "`$1'$($Latest.URL64)'"
         }
-    }
-}
-
-# 👇 Це норм, але навіть можна не писати якщо nuspec в корені
-$global:au_Packages = @{
-    "." = @{
-        NuspecPath = ".\httpdownloader.nuspec"
     }
 }
 
