@@ -58,9 +58,16 @@ jobs:
         run: Remove-Item *.nupkg -ErrorAction Ignore
 
       - name: Commit changes
+        shell: pwsh
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
+
           git add .
-          git commit -m "AU: update package" || echo "No changes"
-          git push
+
+          if (git diff --cached --quiet) {
+            echo "No changes to commit"
+          } else {
+            git commit -m "AU: update package"
+            git push
+          }
