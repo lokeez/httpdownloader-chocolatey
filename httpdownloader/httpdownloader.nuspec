@@ -51,8 +51,11 @@ This is a nuspec. It mostly adheres to https://docs.nuget.org/create/Nuspec-Refe
     <bugTrackerUrl>https://github.com/erickutcher/httpdownloader/issues</bugTrackerUrl>
     <tags>downloader http ftp sftp download-manager portable</tags>
     <summary>High-performance multi-part download manager for HTTP(S), FTP(S), and SFTP.</summary>
-    <description>HTTP Downloader is a download manager for the HTTP(S), FTP(S), and SFTP protocols. Maximize your download throughput by utilizing high performance input/output completion ports (IOCP). HTTP Downloader can open thousands of connections at a time and consumes very little system resources.</description>
-    <releaseNotes>https://raw.githubusercontent.com/erickutcher/httpdownloader/master/HTTP_Downloader/changelog.txt</releaseNotes>
+    <description>HTTP Downloader is a download manager for the HTTP(S), FTP(S), and SFTP protocols. Maximize your download throughput by utilizing high performance input/output completion ports (IOCP). HTTP Downloader can open thousands of connections at a time and consumes very little system resources.
+
+The software author has explicitly permitted redistribution via Chocolatey: https://github.com/erickutcher/httpdownloader/issues/357
+    </description>
+    <releaseNotes>https://github.com/erickutcher/httpdownloader/releases</releaseNotes>
     <!-- =============================== -->
 
     <!-- Specifying dependencies and version ranges? https://docs.nuget.org/create/versioning#specifying-version-ranges-in-.nuspec-files -->
