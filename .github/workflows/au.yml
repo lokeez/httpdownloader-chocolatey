@@ -38,6 +38,10 @@ jobs:
 
           powershell -NoProfile -ExecutionPolicy Bypass -File update.ps1
 
+      - name: Pack Chocolatey package
+        shell: pwsh
+        run: choco pack
+        
       - name: Install package locally
         shell: pwsh
         run: choco install httpdownloader -y -s .
