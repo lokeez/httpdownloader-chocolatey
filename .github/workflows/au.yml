@@ -25,11 +25,14 @@ jobs:
       - name: Run AU update
         shell: pwsh
         run: |
-          Write-Host "GITHUB_WORKSPACE = $env:GITHUB_WORKSPACE"
-          Write-Host "Files in workspace:"
-          Get-ChildItem $env:GITHUB_WORKSPACE -Recurse -Filter "*.nuspec"
+          # AU потребує що pwd = директорія пакету (де лежить nuspec)
+          # Set-Location всередині update.ps1 через $PSScriptRoot це забезпечує
+          # але тільки якщо ми не міняємо pwd ззовні після цього
+          Set-Location "$env:GITHUB_WORKSPACE"
           
-          & "$env:GITHUB_WORKSPACE\update.ps1"
+          # Запускаємо через dot-sourcing щоб Set-Location з $PSScriptRoot
+          # застосувався до поточного процесу, а не до дочірнього
+          . "$env:GITHUB_WORKSPACE\update.ps1"
 
       - name: Run verifier
         shell: pwsh
