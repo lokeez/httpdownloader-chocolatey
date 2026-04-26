@@ -32,7 +32,9 @@ jobs:
 
       - name: Run verifier
         shell: pwsh
-        run: ./tools/verifier.ps1
+        run: |
+          Set-Location "$env:GITHUB_WORKSPACE\httpdownloader"
+          ./tools/verifier.ps1
 
       - name: Commit changes
         shell: pwsh
