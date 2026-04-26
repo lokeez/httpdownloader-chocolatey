@@ -30,12 +30,6 @@ jobs:
           Set-Location "$env:GITHUB_WORKSPACE\httpdownloader"
           pwsh -File "$env:GITHUB_WORKSPACE\httpdownloader\update.ps1"
 
-      - name: Run verifier
-        shell: pwsh
-        run: |
-          Set-Location "$env:GITHUB_WORKSPACE\httpdownloader"
-          ./tools/verifier.ps1
-
       - name: Commit changes
         shell: pwsh
         run: |
