@@ -25,8 +25,11 @@ jobs:
       - name: Run AU update
         shell: pwsh
         run: |
-          Set-Location $env:GITHUB_WORKSPACE
-          ./update.ps1
+          Write-Host "GITHUB_WORKSPACE = $env:GITHUB_WORKSPACE"
+          Write-Host "Files in workspace:"
+          Get-ChildItem $env:GITHUB_WORKSPACE -Recurse -Filter "*.nuspec"
+          
+          & "$env:GITHUB_WORKSPACE\update.ps1"
 
       - name: Run verifier
         shell: pwsh
