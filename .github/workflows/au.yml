@@ -5,6 +5,9 @@ on:
     - cron: '0 3 * * 1'   # щопонеділка о 03:00 UTC
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   update:
     runs-on: windows-latest
@@ -49,6 +52,10 @@ jobs:
       - name: Run verifier
         shell: pwsh
         run: ./tools/verifier.ps1
+
+      - name: Clean artifacts
+        shell: pwsh
+        run: Remove-Item *.nupkg -ErrorAction Ignore
 
       - name: Commit changes
         run: |
